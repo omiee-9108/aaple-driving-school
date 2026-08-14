@@ -488,41 +488,44 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col font-sans max-w-full overflow-x-hidden">
       
       {/* Top Admin Navigation Bar */}
       <header className="bg-slate-950 text-white sticky top-0 z-40 border-b border-slate-800 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold">
-              <Car className="w-5 h-5" />
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-0 sm:h-16 flex items-center justify-between gap-2">
+          {/* Brand Logo & Name */}
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold shrink-0">
+              <Car className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-bold text-base sm:text-lg text-white leading-tight">
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5">
+                <h1 className="font-bold text-sm sm:text-lg text-white leading-tight truncate max-w-[140px] xs:max-w-[200px] sm:max-w-none">
                   {settings.schoolName}
                 </h1>
-                <span className="hidden sm:inline-block px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold rounded uppercase tracking-wider border border-emerald-500/30">
-                  MDS Register MH-10
+                <span className="hidden md:inline-block px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold rounded uppercase tracking-wider border border-emerald-500/30 shrink-0">
+                  MDS MH-10
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 hidden sm:block">
+              <p className="text-[10px] sm:text-[11px] text-slate-400 hidden sm:block truncate">
                 Enrolment Register • Credits • Expenses
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Action Buttons */}
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
             <button
               onClick={() => {
                 setStudentToEdit(null);
                 setStudentModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg shadow-sm transition-all"
+              title="New Admission / Student"
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg shadow-xs transition-all"
             >
-              <PlusCircle className="w-4 h-4" />
-              <span className="hidden sm:inline">New Enrolment</span>
-              <span className="sm:hidden">Admission</span>
+              <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+              <span className="hidden sm:inline">New Admission</span>
+              <span className="sm:hidden text-[11px]">+ Adm</span>
             </button>
 
             <button
@@ -530,192 +533,196 @@ export default function AdminDashboardPage() {
                 setPreSelectedStudentId(undefined);
                 setPaymentModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg shadow-sm transition-all"
+              title="Collect Fee Payment"
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded-lg shadow-xs transition-all"
             >
-              <CreditCard className="w-4 h-4" />
+              <CreditCard className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span className="hidden sm:inline">Collect Fee</span>
-              <span className="sm:hidden">Payment</span>
+              <span className="sm:hidden text-[11px]">+ Fee</span>
             </button>
 
             <button
               onClick={() => setExpenseModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-2 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold rounded-lg shadow-sm transition-all"
+              title="Add Business Expense"
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold rounded-lg shadow-xs transition-all"
             >
-              <Receipt className="w-4 h-4" />
+              <Receipt className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span className="hidden sm:inline">Add Expense</span>
-              <span className="sm:hidden">Expense</span>
+              <span className="sm:hidden text-[11px]">+ Exp</span>
             </button>
 
             <button
               onClick={fetchData}
               title="Refresh Data"
-              className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+              className="p-1.5 sm:p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
             >
-              <RefreshCw className={`w-4 h-4 ${refreshing ? "animate-spin text-emerald-400" : ""}`} />
+              <RefreshCw className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${refreshing ? "animate-spin text-emerald-400" : ""}`} />
             </button>
 
             <button
               onClick={handleLogout}
               title="Logout"
-              className="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-colors"
+              className="p-1.5 sm:p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-colors"
             >
-              <LogOut className="w-4 h-4" />
+              <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
           </div>
         </div>
 
-        {/* Tab Strip */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-1 sm:gap-2 overflow-x-auto border-t border-slate-800/80 py-1.5 scrollbar-none text-xs">
-          <button
-            onClick={() => setActiveTab("overview")}
-            className={`px-3.5 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-              activeTab === "overview"
-                ? "bg-emerald-600 text-white"
-                : "text-slate-400 hover:text-white hover:bg-slate-800"
-            }`}
-          >
-            <LayoutDashboard className="w-4 h-4" />
-            Dashboard Overview
-          </button>
+        {/* Tab Strip with smooth touch scrolling */}
+        <div className="w-full border-t border-slate-800/80 bg-slate-950/80">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center gap-1 overflow-x-auto py-1.5 text-xs scrollbar-none">
+            <button
+              onClick={() => setActiveTab("overview")}
+              className={`px-3 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 shrink-0 ${
+                activeTab === "overview"
+                  ? "bg-emerald-600 text-white"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800"
+              }`}
+            >
+              <LayoutDashboard className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>Overview</span>
+            </button>
 
-          <button
-            onClick={() => setActiveTab("admissions")}
-            className={`px-3.5 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-              activeTab === "admissions"
-                ? "bg-emerald-600 text-white"
-                : "text-slate-400 hover:text-white hover:bg-slate-800"
-            }`}
-          >
-            <Users className="w-4 h-4" />
-            MDS Enrolment Register ({students.length})
-          </button>
+            <button
+              onClick={() => setActiveTab("admissions")}
+              className={`px-3 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 shrink-0 ${
+                activeTab === "admissions"
+                  ? "bg-emerald-600 text-white"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800"
+              }`}
+            >
+              <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>MDS Register ({students.length})</span>
+            </button>
 
-          <button
-            onClick={() => setActiveTab("credits")}
-            className={`px-3.5 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-              activeTab === "credits"
-                ? "bg-emerald-600 text-white"
-                : "text-slate-400 hover:text-white hover:bg-slate-800"
-            }`}
-          >
-            <CreditCard className="w-4 h-4" />
-            Fee Credits ({payments.length})
-          </button>
+            <button
+              onClick={() => setActiveTab("credits")}
+              className={`px-3 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 shrink-0 ${
+                activeTab === "credits"
+                  ? "bg-emerald-600 text-white"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800"
+              }`}
+            >
+              <CreditCard className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>Fee Credits ({payments.length})</span>
+            </button>
 
-          <button
-            onClick={() => setActiveTab("expenses")}
-            className={`px-3.5 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-              activeTab === "expenses"
-                ? "bg-emerald-600 text-white"
-                : "text-slate-400 hover:text-white hover:bg-slate-800"
-            }`}
-          >
-            <Receipt className="w-4 h-4" />
-            Expenses ({expenses.length})
-          </button>
+            <button
+              onClick={() => setActiveTab("expenses")}
+              className={`px-3 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 shrink-0 ${
+                activeTab === "expenses"
+                  ? "bg-emerald-600 text-white"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800"
+              }`}
+            >
+              <Receipt className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>Expenses ({expenses.length})</span>
+            </button>
 
-          <button
-            onClick={() => setActiveTab("reports")}
-            className={`px-3.5 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-              activeTab === "reports"
-                ? "bg-emerald-600 text-white"
-                : "text-slate-400 hover:text-white hover:bg-slate-800"
-            }`}
-          >
-            <TrendingUp className="w-4 h-4" />
-            Reports & Backup
-          </button>
+            <button
+              onClick={() => setActiveTab("reports")}
+              className={`px-3 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 shrink-0 ${
+                activeTab === "reports"
+                  ? "bg-emerald-600 text-white"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800"
+              }`}
+            >
+              <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>Reports</span>
+            </button>
 
-          <button
-            onClick={() => setActiveTab("settings")}
-            className={`px-3.5 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
-              activeTab === "settings"
-                ? "bg-emerald-600 text-white"
-                : "text-slate-400 hover:text-white hover:bg-slate-800"
-            }`}
-          >
-            <Settings className="w-4 h-4" />
-            Settings
-          </button>
+            <button
+              onClick={() => setActiveTab("settings")}
+              className={`px-3 py-1.5 rounded-lg font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 shrink-0 ${
+                activeTab === "settings"
+                  ? "bg-emerald-600 text-white"
+                  : "text-slate-400 hover:text-white hover:bg-slate-800"
+              }`}
+            >
+              <Settings className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>Settings</span>
+            </button>
+          </div>
         </div>
       </header>
 
       {/* Main Content View */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 space-y-5 sm:space-y-6">
         
         {/* ================= 1. OVERVIEW TAB ================= */}
         {activeTab === "overview" && (
-          <div className="space-y-6 animate-in fade-in duration-200">
+          <div className="space-y-5 sm:space-y-6 animate-in fade-in duration-200">
             
             {/* Top Metric Cards */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
                 <div className="flex items-center justify-between text-slate-500">
-                  <span className="text-xs font-semibold uppercase tracking-wider">Total MDS Enrolled</span>
+                  <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Total MDS Enrolled</span>
                   <div className="p-2 bg-purple-50 text-purple-600 rounded-xl">
-                    <GraduationCap className="w-5 h-5" />
+                    <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                 </div>
-                <div className="mt-3">
-                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                <div className="mt-2 sm:mt-3">
+                  <div className="text-xl sm:text-3xl font-extrabold text-slate-900">
                     {metrics.totalStudentsCount}
                   </div>
-                  <div className="text-xs text-emerald-600 font-semibold mt-1">
+                  <div className="text-[11px] sm:text-xs text-emerald-600 font-semibold mt-0.5 sm:mt-1">
                     {metrics.activeStudentsCount} currently in training
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
+              <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
                 <div className="flex items-center justify-between text-slate-500">
-                  <span className="text-xs font-semibold uppercase tracking-wider">Total Credits (Fees Collected)</span>
+                  <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Total Credits (Fees)</span>
                   <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
-                    <DollarSign className="w-5 h-5" />
+                    <DollarSign className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                 </div>
-                <div className="mt-3">
-                  <div className="text-2xl sm:text-3xl font-extrabold text-emerald-700">
+                <div className="mt-2 sm:mt-3">
+                  <div className="text-xl sm:text-3xl font-extrabold text-emerald-700">
                     ₹{metrics.totalCredits.toLocaleString("en-IN")}
                   </div>
-                  <div className="text-xs text-slate-500 mt-1">
+                  <div className="text-[11px] sm:text-xs text-slate-500 mt-0.5 sm:mt-1">
                     Out of ₹{metrics.totalBilled.toLocaleString("en-IN")} total billed
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
+              <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
                 <div className="flex items-center justify-between text-slate-500">
-                  <span className="text-xs font-semibold uppercase tracking-wider">Pending Balance Dues</span>
+                  <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Pending Balance Dues</span>
                   <div className="p-2 bg-amber-50 text-amber-600 rounded-xl">
-                    <AlertTriangle className="w-5 h-5" />
+                    <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                 </div>
-                <div className="mt-3">
-                  <div className="text-2xl sm:text-3xl font-extrabold text-amber-700">
+                <div className="mt-2 sm:mt-3">
+                  <div className="text-xl sm:text-3xl font-extrabold text-amber-700">
                     ₹{metrics.totalDues.toLocaleString("en-IN")}
                   </div>
-                  <div className="text-xs text-slate-500 mt-1">
+                  <div className="text-[11px] sm:text-xs text-slate-500 mt-0.5 sm:mt-1">
                     {students.filter((s) => s.balanceAmount > 0).length} candidates with dues
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
+              <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
                 <div className="flex items-center justify-between text-slate-500">
-                  <span className="text-xs font-semibold uppercase tracking-wider">Net Retained Cash</span>
+                  <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider">Net Retained Cash</span>
                   <div className="p-2 bg-cyan-50 text-cyan-600 rounded-xl">
-                    <TrendingUp className="w-5 h-5" />
+                    <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                 </div>
-                <div className="mt-3">
+                <div className="mt-2 sm:mt-3">
                   <div
-                    className={`text-2xl sm:text-3xl font-extrabold ${
+                    className={`text-xl sm:text-3xl font-extrabold ${
                       metrics.netProfit >= 0 ? "text-cyan-700" : "text-rose-700"
                     }`}
                   >
                     ₹{metrics.netProfit.toLocaleString("en-IN")}
                   </div>
-                  <div className="text-xs text-slate-500 mt-1">
+                  <div className="text-[11px] sm:text-xs text-slate-500 mt-0.5 sm:mt-1">
                     After ₹{metrics.totalExpenseAmount.toLocaleString("en-IN")} expenses
                   </div>
                 </div>
@@ -723,218 +730,199 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Class Breakdown Chips */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">
+            <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
+              <span className="text-[11px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2.5 sm:mb-3">
                 Candidates Breakdown by Vehicle Class (श्रेणीनुसार संख्या)
               </span>
-              <div className="grid grid-cols-2 sm:grid-cols-6 gap-2 text-xs">
-                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-center">
-                  <span className="text-[11px] text-emerald-800 font-bold block">AR.TR (Auto)</span>
-                  <span className="text-xl font-extrabold text-emerald-950">{metrics.classCount["AR.TR"] || 0}</span>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 text-xs">
+                <div className="p-2.5 sm:p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-center">
+                  <span className="text-[10px] sm:text-[11px] text-emerald-800 font-bold block">AR.TR (Auto)</span>
+                  <span className="text-lg sm:text-xl font-extrabold text-emerald-950">{metrics.classCount["AR.TR"] || 0}</span>
                 </div>
-                <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-center">
-                  <span className="text-[11px] text-blue-800 font-bold block">LMV (Car)</span>
-                  <span className="text-xl font-extrabold text-blue-950">{metrics.classCount["LMV"] || 0}</span>
+                <div className="p-2.5 sm:p-3 bg-blue-50 border border-blue-200 rounded-xl text-center">
+                  <span className="text-[10px] sm:text-[11px] text-blue-800 font-bold block">LMV (Car)</span>
+                  <span className="text-lg sm:text-xl font-extrabold text-blue-950">{metrics.classCount["LMV"] || 0}</span>
                 </div>
-                <div className="p-3 bg-purple-50 border border-purple-200 rounded-xl text-center">
-                  <span className="text-[11px] text-purple-800 font-bold block">LMV (TR)</span>
-                  <span className="text-xl font-extrabold text-purple-950">{metrics.classCount["LMV (TR)"] || 0}</span>
+                <div className="p-2.5 sm:p-3 bg-purple-50 border border-purple-200 rounded-xl text-center">
+                  <span className="text-[10px] sm:text-[11px] text-purple-800 font-bold block">LMV (TR)</span>
+                  <span className="text-lg sm:text-xl font-extrabold text-purple-950">{metrics.classCount["LMV (TR)"] || 0}</span>
                 </div>
-                <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-center">
-                  <span className="text-[11px] text-amber-800 font-bold block">MCB + AR.TR</span>
-                  <span className="text-xl font-extrabold text-amber-950">{metrics.classCount["MCB. AR.TR"] || 0}</span>
+                <div className="p-2.5 sm:p-3 bg-amber-50 border border-amber-200 rounded-xl text-center">
+                  <span className="text-[10px] sm:text-[11px] text-amber-800 font-bold block">MCB + AR.TR</span>
+                  <span className="text-lg sm:text-xl font-extrabold text-amber-950">{metrics.classCount["MCB. AR.TR"] || 0}</span>
                 </div>
-                <div className="p-3 bg-cyan-50 border border-cyan-200 rounded-xl text-center">
-                  <span className="text-[11px] text-cyan-800 font-bold block">Renewal</span>
-                  <span className="text-xl font-extrabold text-cyan-950">{metrics.classCount["Renewal"] || 0}</span>
+                <div className="p-2.5 sm:p-3 bg-cyan-50 border border-cyan-200 rounded-xl text-center">
+                  <span className="text-[10px] sm:text-[11px] text-cyan-800 font-bold block">Renewal</span>
+                  <span className="text-lg sm:text-xl font-extrabold text-cyan-950">{metrics.classCount["Renewal"] || 0}</span>
                 </div>
-                <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-center">
-                  <span className="text-[11px] text-slate-600 font-bold block">Total Registered</span>
-                  <span className="text-xl font-extrabold text-slate-900">{students.length}</span>
+                <div className="p-2.5 sm:p-3 bg-slate-50 border border-slate-200 rounded-xl text-center">
+                  <span className="text-[10px] sm:text-[11px] text-slate-600 font-bold block">Total Registered</span>
+                  <span className="text-lg sm:text-xl font-extrabold text-slate-900">{students.length}</span>
                 </div>
               </div>
             </div>
 
             {/* Income vs Expenses Cashflow Summary Bar */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <h3 className="font-bold text-base text-slate-900">Cashflow & Profit Summary</h3>
-                  <p className="text-xs text-slate-500">Collected Income vs Recorded Business Expenses</p>
+                  <h2 className="font-bold text-sm sm:text-base text-slate-900">
+                    Business Financial & Cashflow Health
+                  </h2>
+                  <p className="text-xs text-slate-500">
+                    Proprietor ledger tracking received candidate payments against school overheads
+                  </p>
                 </div>
-                <div className="flex items-center gap-4 text-xs font-semibold">
-                  <span className="flex items-center gap-1.5 text-emerald-700">
-                    <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" />
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg">
                     Income: ₹{metrics.totalCredits.toLocaleString("en-IN")}
                   </span>
-                  <span className="flex items-center gap-1.5 text-rose-700">
-                    <span className="w-3 h-3 rounded-full bg-rose-500 inline-block" />
+                  <span className="px-2.5 py-1 bg-rose-100 text-rose-800 font-bold rounded-lg">
                     Expenses: ₹{metrics.totalExpenseAmount.toLocaleString("en-IN")}
                   </span>
                 </div>
               </div>
 
-              {/* Progress Bar Visualization */}
-              <div className="space-y-1">
-                <div className="h-4 w-full bg-slate-100 rounded-full overflow-hidden flex">
+              {/* Progress Bar */}
+              <div className="space-y-1.5">
+                <div className="w-full h-3 sm:h-3.5 bg-slate-100 rounded-full overflow-hidden flex border border-slate-200">
                   <div
                     style={{
                       width: `${
                         metrics.totalCredits + metrics.totalExpenseAmount > 0
-                          ? Math.round(
-                              (metrics.totalCredits / (metrics.totalCredits + metrics.totalExpenseAmount)) * 100
+                          ? Math.min(
+                              100,
+                              Math.round(
+                                (metrics.totalCredits /
+                                  (metrics.totalCredits + metrics.totalExpenseAmount)) *
+                                  100
+                              )
                             )
-                          : 50
+                          : 100
                       }%`,
                     }}
-                    className="bg-emerald-500 h-full transition-all"
+                    className="bg-emerald-500 h-full transition-all duration-500"
+                    title={`Credits / Inflow: ₹${metrics.totalCredits}`}
                   />
                   <div
                     style={{
                       width: `${
                         metrics.totalCredits + metrics.totalExpenseAmount > 0
-                          ? Math.round(
-                              (metrics.totalExpenseAmount / (metrics.totalCredits + metrics.totalExpenseAmount)) * 100
+                          ? Math.min(
+                              100,
+                              Math.round(
+                                (metrics.totalExpenseAmount /
+                                  (metrics.totalCredits + metrics.totalExpenseAmount)) *
+                                  100
+                              )
                             )
-                          : 50
+                          : 0
                       }%`,
                     }}
-                    className="bg-rose-500 h-full transition-all"
+                    className="bg-rose-500 h-full transition-all duration-500"
+                    title={`Expenses / Outflow: ₹${metrics.totalExpenseAmount}`}
                   />
                 </div>
                 <div className="flex justify-between text-[11px] text-slate-400 font-medium">
-                  <span>Credits Ratio ({metrics.totalCredits > 0 ? Math.round((metrics.totalCredits / (metrics.totalCredits + metrics.totalExpenseAmount)) * 100) : 0}%)</span>
-                  <span>Expense Ratio ({metrics.totalExpenseAmount > 0 ? Math.round((metrics.totalExpenseAmount / (metrics.totalCredits + metrics.totalExpenseAmount)) * 100) : 0}%)</span>
+                  <span>
+                    Net Margin: {metrics.totalCredits > 0 ? Math.round((metrics.netProfit / metrics.totalCredits) * 100) : 0}%
+                  </span>
+                  <span>{metrics.netProfit >= 0 ? "Profitable Period" : "Loss Period"}</span>
                 </div>
               </div>
             </div>
 
-            {/* Two Column Grid: Pending Dues & Recent Payments */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              
-              {/* Urgent Outstanding Dues Table */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
-                <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-amber-50/50">
-                  <div className="flex items-center gap-2">
-                    <AlertTriangle className="w-4 h-4 text-amber-600" />
-                    <h3 className="font-bold text-sm text-slate-900">
-                      Candidates with Pending Fee Dues
-                    </h3>
-                  </div>
+            {/* Recent Admissions + Recent Expenses Quick Feed */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+              {/* Recent Admissions */}
+              <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold text-xs sm:text-sm text-slate-900 flex items-center gap-2">
+                    <Users className="w-4 h-4 text-purple-600" />
+                    Latest MDS Admissions
+                  </h3>
                   <button
-                    onClick={() => {
-                      setStudentStatusFilter("dues");
-                      setActiveTab("admissions");
-                    }}
-                    className="text-xs font-bold text-amber-800 hover:underline"
+                    onClick={() => setActiveTab("admissions")}
+                    className="text-xs text-emerald-600 font-semibold hover:underline"
                   >
-                    View All →
+                    View All ({students.length}) →
                   </button>
                 </div>
 
-                <div className="p-4 flex-1 overflow-x-auto divide-y divide-slate-100">
-                  {students.filter((s) => s.balanceAmount > 0).length === 0 ? (
-                    <div className="py-8 text-center text-slate-400 text-xs">
-                      🎉 All candidate fees are completely cleared! No pending dues.
-                    </div>
-                  ) : (
-                    students
-                      .filter((s) => s.balanceAmount > 0)
-                      .slice(0, 5)
-                      .map((s) => (
-                        <div key={s.id} className="py-3 flex items-center justify-between text-xs">
-                          <div>
-                            <div className="font-bold text-slate-900">
-                              {s.name}{" "}
-                              {s.enrolmentNo && (
-                                <span className="font-mono text-[10px] text-blue-700 bg-blue-50 px-1 py-0.5 rounded">
-                                  {s.enrolmentNo}
-                                </span>
-                              )}
-                            </div>
-                            <div className="text-[11px] text-slate-500">
-                              {s.phone} • Class: {s.classCategory || s.course} • Agent: {s.agent || "MB"}
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-3 text-right">
-                            <div>
-                              <div className="font-bold text-amber-700 text-sm">
-                                ₹{s.balanceAmount}
-                              </div>
-                              <div className="text-[10px] text-slate-400">
-                                Paid: ₹{s.paidAmount} / {s.totalFee}
-                              </div>
-                            </div>
-
-                            <button
-                              onClick={() => {
-                                setDrawerStudent(s);
-                              }}
-                              className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg transition-colors"
-                            >
-                              Details
-                            </button>
-                          </div>
+                <div className="space-y-2">
+                  {students.slice(0, 5).map((s) => (
+                    <div
+                      key={s.id}
+                      onClick={() => setDrawerStudent(s)}
+                      className="p-3 bg-slate-50 hover:bg-slate-100 rounded-xl flex items-center justify-between cursor-pointer transition-colors border border-slate-100"
+                    >
+                      <div className="min-w-0 pr-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-bold text-xs sm:text-sm text-slate-900 truncate">{s.name}</span>
+                          {s.enrolmentNo && (
+                            <span className="text-[10px] font-mono font-bold text-amber-700 bg-amber-100 px-1.5 py-0.2 rounded shrink-0">
+                              {s.enrolmentNo}
+                            </span>
+                          )}
                         </div>
-                      ))
-                  )}
+                        <div className="text-[11px] text-slate-500 mt-0.5 truncate">
+                          {s.classCategory || s.course} • {s.admissionDate}
+                        </div>
+                      </div>
+
+                      <div className="text-right shrink-0">
+                        <div className="font-bold text-xs sm:text-sm text-slate-800">₹{s.totalFee}</div>
+                        {s.balanceAmount > 0 ? (
+                          <span className="text-[10px] text-amber-700 font-bold bg-amber-100 px-1.5 py-0.5 rounded">
+                            Due: ₹{s.balanceAmount}
+                          </span>
+                        ) : (
+                          <span className="text-[10px] text-emerald-700 font-bold bg-emerald-100 px-1.5 py-0.5 rounded">
+                            Paid Full
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Recent Payment Credits */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
-                <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-emerald-50/50">
-                  <div className="flex items-center gap-2">
-                    <CreditCard className="w-4 h-4 text-emerald-600" />
-                    <h3 className="font-bold text-sm text-slate-900">
-                      Recent Fee Payments Received
-                    </h3>
-                  </div>
+              {/* Recent Expenses */}
+              <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold text-xs sm:text-sm text-slate-900 flex items-center gap-2">
+                    <Receipt className="w-4 h-4 text-rose-600" />
+                    Latest Operational Expenses
+                  </h3>
                   <button
-                    onClick={() => setActiveTab("credits")}
-                    className="text-xs font-bold text-emerald-800 hover:underline"
+                    onClick={() => setActiveTab("expenses")}
+                    className="text-xs text-rose-600 font-semibold hover:underline"
                   >
-                    View All →
+                    View All ({expenses.length}) →
                   </button>
                 </div>
 
-                <div className="p-4 flex-1 overflow-x-auto divide-y divide-slate-100">
-                  {payments.length === 0 ? (
-                    <div className="py-8 text-center text-slate-400 text-xs">
-                      No payments recorded yet.
-                    </div>
-                  ) : (
-                    payments.slice(0, 5).map((p) => (
-                      <div key={p.id} className="py-3 flex items-center justify-between text-xs">
-                        <div>
-                          <div className="font-bold text-slate-900">{p.studentName}</div>
-                          <div className="text-[11px] text-slate-500">
-                            {p.receiptNo} • {p.paymentDate} • {p.paymentMode}
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                          <div className="font-bold text-emerald-700 text-sm">
-                            + ₹{p.amount.toLocaleString("en-IN")}
-                          </div>
-                          <button
-                            onClick={() => {
-                              const st = students.find((s) => s.id === p.studentId);
-                              setActivePaymentForReceipt(p);
-                              setActiveStudentForReceipt(st);
-                              setReceiptType("payment");
-                              setReceiptModalOpen(true);
-                            }}
-                            title="Print Receipt"
-                            className="p-1.5 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
-                          >
-                            <Printer className="w-4 h-4" />
-                          </button>
+                <div className="space-y-2">
+                  {expenses.slice(0, 5).map((e) => (
+                    <div
+                      key={e.id}
+                      className="p-3 bg-slate-50 rounded-xl flex items-center justify-between border border-slate-100"
+                    >
+                      <div className="min-w-0 pr-2">
+                        <div className="font-bold text-xs sm:text-sm text-slate-900 truncate">{e.category}</div>
+                        <div className="text-[11px] text-slate-500 mt-0.5 truncate">
+                          {e.paidTo} • {e.expenseDate}
                         </div>
                       </div>
-                    ))
-                  )}
+
+                      <div className="text-right shrink-0">
+                        <span className="font-extrabold text-xs sm:text-sm text-rose-600">
+                          - ₹{e.amount.toLocaleString("en-IN")}
+                        </span>
+                        <div className="text-[10px] text-slate-400 font-mono mt-0.5">{e.paymentMode}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -946,23 +934,23 @@ export default function AdminDashboardPage() {
           <div className="space-y-4 animate-in fade-in duration-200">
             
             {/* Search & Filters Toolbar */}
-            <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col lg:flex-row gap-3 items-center justify-between">
+            <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col lg:flex-row gap-2.5 sm:gap-3 items-stretch lg:items-center justify-between">
               <div className="relative w-full lg:w-80">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
-                  placeholder="Search by name, E.No (3924/..), LL, DL, phone..."
+                  placeholder="Search name, E.No, LL, DL, phone..."
                   value={studentSearch}
                   onChange={(e) => setStudentSearch(e.target.value)}
                   className="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500 text-xs"
                 />
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+              <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 w-full lg:w-auto">
                 <select
                   value={studentClassFilter}
                   onChange={(e) => setStudentClassFilter(e.target.value)}
-                  className="px-3 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 bg-white"
+                  className="px-2.5 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 bg-white"
                 >
                   <option value="all">All Classes</option>
                   <option value="AR.TR">AR.TR (Auto)</option>
@@ -975,12 +963,12 @@ export default function AdminDashboardPage() {
                 <select
                   value={studentAgentFilter}
                   onChange={(e) => setStudentAgentFilter(e.target.value)}
-                  className="px-3 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 bg-white"
+                  className="px-2.5 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 bg-white"
                 >
                   <option value="all">All Agents</option>
                   {uniqueAgents.map((ag) => (
                     <option key={ag} value={ag}>
-                      Agent: {ag}
+                      {ag}
                     </option>
                   ))}
                 </select>
@@ -988,7 +976,7 @@ export default function AdminDashboardPage() {
                 <select
                   value={studentStatusFilter}
                   onChange={(e) => setStudentStatusFilter(e.target.value)}
-                  className="px-3 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 bg-white"
+                  className="col-span-2 sm:col-span-1 px-2.5 py-2 border border-slate-300 rounded-lg text-xs font-semibold text-slate-700 bg-white"
                 >
                   <option value="all">All Statuses</option>
                   <option value="dues">⚠️ Dues Pending Only</option>
@@ -1000,10 +988,10 @@ export default function AdminDashboardPage() {
 
                 <button
                   onClick={exportStudentsCSV}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition-colors border border-slate-300"
+                  className="col-span-2 sm:col-span-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition-colors border border-slate-300"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  MDS Register CSV
+                  <span>Export CSV</span>
                 </button>
               </div>
             </div>
