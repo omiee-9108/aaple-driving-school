@@ -1,7 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { LocalBusinessSchema } from "@/components/common/LocalBusinessSchema";
 import { SiteLayoutWrapper } from "@/components/layout/SiteLayoutWrapper";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#022c22",
+};
 
 
 export const metadata: Metadata = {

@@ -1006,9 +1006,10 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* Students Table */}
+            {/* Students View: Desktop Table + Mobile Card Stack */}
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-              <div className="overflow-x-auto">
+              {/* Desktop Table View (md and up) */}
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
                     <tr>
@@ -1164,6 +1165,136 @@ export default function AdminDashboardPage() {
                   </tbody>
                 </table>
               </div>
+
+              {/* Mobile Candidate Card Feed (Phones < md) */}
+              <div className="md:hidden divide-y divide-slate-100 p-2 space-y-2">
+                {filteredStudents.length === 0 ? (
+                  <div className="py-8 text-center text-slate-400 text-xs">
+                    No candidate records matching current search / filters.
+                  </div>
+                ) : (
+                  filteredStudents.map((s) => (
+                    <div
+                      key={s.id}
+                      onClick={() => setDrawerStudent(s)}
+                      className="p-3.5 bg-white border border-slate-200 rounded-xl shadow-xs space-y-2.5 active:bg-slate-50 transition-colors"
+                    >
+                      {/* Top Row: Name, E.No, Class */}
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <div className="font-bold text-slate-900 text-sm">{s.name}</div>
+                          <div className="flex items-center gap-2 mt-0.5 text-[11px]">
+                            {s.enrolmentNo && (
+                              <span className="font-mono font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200">
+                                E.No: {s.enrolmentNo}
+                              </span>
+                            )}
+                            <span className="text-slate-500">Agent: <b>{s.agent || "MB"}</b></span>
+                          </div>
+                        </div>
+
+                        <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-mono font-bold rounded text-[11px] border border-emerald-300">
+                          {s.classCategory || "AR.TR"}
+                        </span>
+                      </div>
+
+                      {/* Middle Row: Phone & Dates */}
+                      <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-2 rounded-lg border border-slate-100">
+                        <div>
+                          <span className="text-[10px] text-slate-400 block font-semibold">Contact</span>
+                          <a
+                            href={`tel:${s.phone}`}
+                            onClick={(e) => e.stopPropagation()}
+                            className="font-bold text-slate-800 hover:text-emerald-600 inline-flex items-center gap-1 font-mono text-[11px]"
+                          >
+                            <Phone className="w-3 h-3 text-emerald-600" />
+                            {s.phone}
+                          </a>
+                        </div>
+
+                        <div>
+                          <span className="text-[10px] text-slate-400 block font-semibold">Training Dates</span>
+                          <span className="text-[11px] text-slate-700 font-medium">
+                            {s.startDate || s.admissionDate} {s.endDate && `→ ${s.endDate}`}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Parivahan Numbers if available */}
+                      {(s.llApplicationNo || s.dlApplicationNo || s.dlNumber) && (
+                        <div className="text-[11px] font-mono flex flex-wrap items-center gap-2 text-slate-700">
+                          {s.llApplicationNo && (
+                            <span className="bg-purple-50 text-purple-800 px-1.5 py-0.5 rounded border border-purple-200">
+                              LL: {s.llApplicationNo}
+                            </span>
+                          )}
+                          {s.dlApplicationNo && (
+                            <span className="bg-cyan-50 text-cyan-800 px-1.5 py-0.5 rounded border border-cyan-200">
+                              DL App: {s.dlApplicationNo}
+                            </span>
+                          )}
+                          {s.dlNumber && (
+                            <span className="bg-emerald-50 text-emerald-900 font-bold px-1.5 py-0.5 rounded border border-emerald-200">
+                              DL: {s.dlNumber}
+                            </span>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Bottom Row: Fees + Action Buttons */}
+                      <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+                        <div>
+                          <span className="font-bold text-slate-900">₹{s.totalFee}</span>
+                          <span className="text-slate-400 text-[10px] ml-1.5">
+                            (Paid: ₹{s.paidAmount})
+                          </span>
+                          {s.balanceAmount > 0 && (
+                            <span className="block text-[10px] font-bold text-amber-700">
+                              Due: ₹{s.balanceAmount}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+                          <button
+                            onClick={() => {
+                              setPreSelectedStudentId(s.id);
+                              setPaymentModalOpen(true);
+                            }}
+                            className="px-2.5 py-1.5 bg-emerald-600 active:bg-emerald-700 text-white rounded-lg font-bold text-[11px] flex items-center gap-1"
+                          >
+                            <CreditCard className="w-3.5 h-3.5" />
+                            Fee
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              setActiveStudentForReceipt(s);
+                              setReceiptType("admission");
+                              setReceiptModalOpen(true);
+                            }}
+                            className="p-1.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200"
+                            title="Print Slip"
+                          >
+                            <Printer className="w-4 h-4" />
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              setStudentToEdit(s);
+                              setStudentModalOpen(true);
+                            }}
+                            className="p-1.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200"
+                            title="Edit"
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
         )}
@@ -1208,9 +1339,9 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* Payments Table */}
+            {/* Payments View: Desktop Table + Mobile Cards */}
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-              <div className="overflow-x-auto">
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
                     <tr>
@@ -1288,6 +1419,66 @@ export default function AdminDashboardPage() {
                     )}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Mobile Payment Cards */}
+              <div className="md:hidden divide-y divide-slate-100 p-2 space-y-2">
+                {filteredPayments.length === 0 ? (
+                  <div className="py-8 text-center text-slate-400 text-xs">
+                    No payment transactions found.
+                  </div>
+                ) : (
+                  filteredPayments.map((p) => (
+                    <div
+                      key={p.id}
+                      className="p-3.5 bg-white border border-slate-200 rounded-xl shadow-xs space-y-2 text-xs"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <span className="font-mono font-bold text-slate-900">{p.receiptNo}</span>
+                          <span className="text-[11px] text-slate-400 block">{p.paymentDate}</span>
+                        </div>
+                        <span className="font-extrabold text-emerald-700 text-sm">
+                          + ₹{p.amount.toLocaleString("en-IN")}
+                        </span>
+                      </div>
+
+                      <div>
+                        <div className="font-bold text-slate-800">{p.studentName}</div>
+                        <div className="text-[11px] text-slate-500">{p.course}</div>
+                      </div>
+
+                      <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+                        <span className="px-2 py-0.5 bg-slate-100 text-slate-700 font-semibold rounded text-[10px]">
+                          {p.paymentMode} {p.transactionRef && `• ${p.transactionRef}`}
+                        </span>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => {
+                              const st = students.find((s) => s.id === p.studentId);
+                              setActivePaymentForReceipt(p);
+                              setActiveStudentForReceipt(st);
+                              setReceiptType("payment");
+                              setReceiptModalOpen(true);
+                            }}
+                            className="px-2 py-1 bg-emerald-50 text-emerald-700 font-bold rounded-md flex items-center gap-1 text-[11px]"
+                          >
+                            <Printer className="w-3.5 h-3.5" />
+                            Receipt
+                          </button>
+
+                          <button
+                            onClick={() => handleDeletePayment(p.id)}
+                            className="p-1 text-slate-400 hover:text-rose-600"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>
@@ -1382,9 +1573,9 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* Expenses Table */}
+            {/* Expenses View: Desktop Table + Mobile Cards */}
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-              <div className="overflow-x-auto">
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
                     <tr>
@@ -1446,9 +1637,56 @@ export default function AdminDashboardPage() {
                   </tbody>
                 </table>
               </div>
+
+              {/* Mobile Expense Cards */}
+              <div className="md:hidden divide-y divide-slate-100 p-2 space-y-2">
+                {filteredExpenses.length === 0 ? (
+                  <div className="py-8 text-center text-slate-400 text-xs">
+                    No expense vouchers recorded.
+                  </div>
+                ) : (
+                  filteredExpenses.map((e) => (
+                    <div
+                      key={e.id}
+                      className="p-3.5 bg-white border border-slate-200 rounded-xl shadow-xs space-y-2 text-xs"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <span className="font-mono font-bold text-slate-900">{e.voucherNo}</span>
+                          <span className="text-[11px] text-slate-400 block">{e.expenseDate}</span>
+                        </div>
+                        <span className="font-extrabold text-rose-700 text-sm">
+                          - ₹{e.amount.toLocaleString("en-IN")}
+                        </span>
+                      </div>
+
+                      <div>
+                        <span className="font-semibold text-slate-900">{e.category}</span>
+                        {e.vehicleNo && (
+                          <span className="ml-2 text-[10px] font-mono bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">
+                            {e.vehicleNo}
+                          </span>
+                        )}
+                        {e.notes && <div className="text-[11px] text-slate-500 mt-0.5">{e.notes}</div>}
+                      </div>
+
+                      <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-slate-600">
+                        <span>Paid to: <b>{e.paidTo}</b> ({e.paymentMode})</span>
+                        <button
+                          onClick={() => handleDeleteExpense(e.id)}
+                          className="p-1 text-slate-400 hover:text-rose-600"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
         )}
+
 
         {/* ================= 5. REPORTS & BACKUP TAB ================= */}
         {activeTab === "reports" && (
