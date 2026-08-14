@@ -161,8 +161,10 @@ export default function AdminDashboardPage() {
 
   // Logout handler
   const handleLogout = async () => {
-    await fetch("/api/admin/auth", { method: "DELETE" });
-    router.replace("/admin/login");
+    try {
+      await fetch("/api/admin/auth", { method: "DELETE" });
+    } catch {}
+    window.location.href = "/admin/login";
   };
 
   // Student Save Handler

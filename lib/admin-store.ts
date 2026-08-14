@@ -875,40 +875,81 @@ export const INITIAL_CLIENT_DATA: AdminDatabase = {
   ],
 };
 
+declare global {
+  // eslint-disable-next-line no-var
+  var __aapleAdminDb: AdminDatabase | undefined;
+}
+
+const TMP_FILE_PATH = path.join("/tmp", "admin-records.json");
+
 /**
- * Ensure database file exists and load data
+ * Ensure database exists and load data seamlessly in local and serverless environments
  */
 export function getAdminDatabase(): AdminDatabase {
+  if (globalThis.__aapleAdminDb) {
+    return globalThis.__aapleAdminDb;
+  }
+
   try {
-    if (!fs.existsSync(DATA_FILE_PATH)) {
-      fs.mkdirSync(path.dirname(DATA_FILE_PATH), { recursive: true });
-      fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(INITIAL_CLIENT_DATA, null, 2), "utf-8");
-      return INITIAL_CLIENT_DATA;
+    // 1. Try reading from /tmp if modified recently
+    if (fs.existsSync(TMP_FILE_PATH)) {
+      const raw = fs.readFileSync(TMP_FILE_PATH, "utf-8");
+      const parsed: AdminDatabase = JSON.parse(raw);
+      globalThis.__aapleAdminDb = {
+        settings: { ...INITIAL_CLIENT_DATA.settings, ...(parsed.settings || {}) },
+        students: parsed.students || [],
+        payments: parsed.payments || [],
+        expenses: parsed.expenses || [],
+      };
+      return globalThis.__aapleAdminDb;
     }
-    const raw = fs.readFileSync(DATA_FILE_PATH, "utf-8");
-    const parsed: AdminDatabase = JSON.parse(raw);
-    return {
-      settings: { ...INITIAL_CLIENT_DATA.settings, ...(parsed.settings || {}) },
-      students: parsed.students || [],
-      payments: parsed.payments || [],
-      expenses: parsed.expenses || [],
-    };
+
+    // 2. Try reading from bundled project file
+    if (fs.existsSync(DATA_FILE_PATH)) {
+      const raw = fs.readFileSync(DATA_FILE_PATH, "utf-8");
+      const parsed: AdminDatabase = JSON.parse(raw);
+      globalThis.__aapleAdminDb = {
+        settings: { ...INITIAL_CLIENT_DATA.settings, ...(parsed.settings || {}) },
+        students: parsed.students || [],
+        payments: parsed.payments || [],
+        expenses: parsed.expenses || [],
+      };
+      return globalThis.__aapleAdminDb;
+    }
+
+    // 3. Fallback to INITIAL_CLIENT_DATA
+    globalThis.__aapleAdminDb = JSON.parse(JSON.stringify(INITIAL_CLIENT_DATA));
+    return globalThis.__aapleAdminDb!;
   } catch (error) {
     console.error("Error reading admin database file:", error);
-    return INITIAL_CLIENT_DATA;
+    globalThis.__aapleAdminDb = JSON.parse(JSON.stringify(INITIAL_CLIENT_DATA));
+    return globalThis.__aapleAdminDb!;
   }
 }
 
 /**
- * Save database to disk
+ * Save database to cache and disk (handles read-only serverless filesystems seamlessly)
  */
 export function saveAdminDatabase(data: AdminDatabase): boolean {
   try {
-    fs.mkdirSync(path.dirname(DATA_FILE_PATH), { recursive: true });
-    fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
+    globalThis.__aapleAdminDb = data;
+
+    // Try saving to project data directory if writable
+    try {
+      fs.mkdirSync(path.dirname(DATA_FILE_PATH), { recursive: true });
+      fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
+    } catch {
+      // If project root is read-only (e.g. on Vercel lambda), write to /tmp
+      try {
+        fs.writeFileSync(TMP_FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
+      } catch (tmpErr) {
+        console.warn("Could not write to /tmp:", tmpErr);
+      }
+    }
+
     return true;
   } catch (error) {
-    console.error("Error saving admin database file:", error);
+    console.error("Error saving admin database:", error);
     return false;
   }
 }

@@ -18,14 +18,14 @@ export default function AdminLoginPage() {
         const res = await fetch("/api/admin/auth");
         const data = await res.json();
         if (data.authenticated) {
-          router.replace("/admin");
+          window.location.href = "/admin";
         }
       } catch (err) {
         // Not authenticated
       }
     }
     checkExistingAuth();
-  }, [router]);
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,13 +41,13 @@ export default function AdminLoginPage() {
       const res = await fetch("/api/admin/auth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ password: password.trim() }),
       });
 
       const data = await res.json();
 
       if (res.ok && data.success) {
-        router.replace("/admin");
+        window.location.href = "/admin";
       } else {
         setError(data.message || "Invalid password. Access denied.");
       }

@@ -21,22 +21,34 @@ export function createSessionToken(password: string): string {
  * Verify a session token against valid passwords
  */
 export function verifySessionToken(token: string, validPassword: string = DEFAULT_PASSWORD): boolean {
-  if (!token || !token.includes(".")) return false;
-  const [timestamp, signature] = token.split(".");
-  
-  // Verify token expiration (7 days)
-  const tokenAge = Date.now() - parseInt(timestamp, 10);
-  const maxAge = 7 * 24 * 60 * 60 * 1000;
-  if (isNaN(tokenAge) || tokenAge < 0 || tokenAge > maxAge) {
+  try {
+    if (!token || !token.includes(".")) return false;
+    const [timestamp, signature] = token.split(".");
+    if (!timestamp || !signature) return false;
+    
+    // Verify token expiration (7 days)
+    const tokenAge = Date.now() - parseInt(timestamp, 10);
+    const maxAge = 7 * 24 * 60 * 60 * 1000;
+    if (isNaN(tokenAge) || tokenAge < 0 || tokenAge > maxAge) {
+      return false;
+    }
+
+    const expectedSignature = crypto
+      .createHmac("sha256", SESSION_SECRET)
+      .update(`${validPassword}-${timestamp}`)
+      .digest("hex");
+
+    const sigBuf = Buffer.from(signature, "utf-8");
+    const expBuf = Buffer.from(expectedSignature, "utf-8");
+
+    if (sigBuf.length !== expBuf.length) {
+      return false;
+    }
+
+    return crypto.timingSafeEqual(sigBuf, expBuf);
+  } catch (err) {
     return false;
   }
-
-  const expectedSignature = crypto
-    .createHmac("sha256", SESSION_SECRET)
-    .update(`${validPassword}-${timestamp}`)
-    .digest("hex");
-
-  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature));
 }
 
 /**
