@@ -18,13 +18,13 @@ export const siteSettingsSchema = {
       name: "primaryPhone",
       title: "Primary Phone Number",
       type: "string",
-      initialValue: "+91 70831 27002",
+      initialValue: "+91 88883 34136",
     },
     {
       name: "whatsappNumber",
       title: "WhatsApp Number",
       type: "string",
-      initialValue: "+91 70831 27002",
+      initialValue: "+91 88883 34136",
     },
     {
       name: "email",

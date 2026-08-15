@@ -59,7 +59,7 @@ export default function AdminDashboardPage() {
     schoolName: "Aaple Motor Driving School",
     tagline: "Government Authorized Motor Training School & RTO Consultancy",
     address: "Opp. Miraj RTO Office Ground, Gandhi Chowk Road, Miraj, Maharashtra 416410",
-    phone: "+91 70831 27002",
+    phone: "+91 88883 34136 / +91 70288 37002",
     email: "contact@aapledrivingschool.in",
     rtoJurisdiction: "MH-10 (Miraj / Sangli)",
   });

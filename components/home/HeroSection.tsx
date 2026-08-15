@@ -99,7 +99,7 @@ export const HeroSection: React.FC = () => {
                 href="/services"
                 className="w-full sm:w-auto border-brand-400 text-white hover:bg-brand-800/80 hover:text-white"
               >
-                Explore All 10 Services →
+                Explore All Services & Packages →
               </Button>
             </div>
 

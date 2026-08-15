@@ -83,7 +83,7 @@ export function ReceiptModal({
               {settings.address || "Opp. Miraj RTO Office Ground, Gandhi Chowk Road, Miraj, Maharashtra 416410"}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-600 mt-2 font-medium">
-              <span>📞 Phone: {settings.phone || "+91 70831 27002"}</span>
+              <span>📞 Phone: {settings.phone || "+91 88883 34136 / +91 70288 37002"}</span>
               <span>•</span>
               <span>✉️ Email: {settings.email || "contact@aapledrivingschool.in"}</span>
               <span>•</span>

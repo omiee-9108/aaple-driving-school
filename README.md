@@ -160,6 +160,7 @@ npm run start
 ## 📞 Business Information
 - **Business Name**: Aaple Motor Driving School (आपले मोटर ड्रायव्हिंग स्कूल)
 - **Address**: Opp. Miraj RTO Office Ground, Gandhi Chowk Road, Shivaji Nagar, Miraj, Maharashtra 416410
-- **Phone**: +91 70831 27002
-- **WhatsApp**: +91 70831 27002
+- **Phone (Office)**: +91 88883 34136
+- **Phone (Personal)**: +91 70288 37002
+- **WhatsApp**: +91 88883 34136
 - **RTO Jurisdiction**: MH-10 (Miraj / Sangli)

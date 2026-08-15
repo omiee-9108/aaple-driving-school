@@ -61,12 +61,12 @@ export const siteConfig: SiteConfig = {
   tagline: "Miraj's Most Trusted & RTO Approved Motor Driving Training Center",
   description:
     "Government approved driving school in Miraj (MH-10) offering end-to-end driving training, 2-wheeler & 4-wheeler license, license renewal, PUC testing, RC transfer, and vehicle registration services with dual-control modern vehicles and certified instructors.",
-  phone: "+91 70831 27002",
-  phoneRaw: "917083127002",
-  altPhone: "+91 70831 27002",
-  altPhoneRaw: "917083127002",
-  whatsapp: "+91 70831 27002",
-  whatsappRaw: "917083127002",
+  phone: "+91 88883 34136",
+  phoneRaw: "918888334136",
+  altPhone: "+91 70288 37002",
+  altPhoneRaw: "917028837002",
+  whatsapp: "+91 88883 34136",
+  whatsappRaw: "918888334136",
   whatsappMessage: "Namaskar! I am interested in Driving Training / RTO Services at Aaple Motor Driving School Miraj. Please share details.",
   email: "contact@aapledrivingschool.in",
   address: {

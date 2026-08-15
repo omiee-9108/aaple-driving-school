@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to process enquiry. Please call us directly on +91 70831 27002.",
+        error: "Failed to process enquiry. Please call us directly on +91 88883 34136 / +91 70288 37002.",
       },
       { status: 500 }
     );

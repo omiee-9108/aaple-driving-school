@@ -17,7 +17,7 @@ export function formatIndianPhoneNumber(phone: string): string {
 }
 
 export function getWhatsAppLink(message?: string): string {
-  const phone = "917083127002";
+  const phone = "918888334136";
   const defaultText = "Namaskar! I want to enquire about driving classes / RTO services at Aaple Motor Driving School Miraj.";
   const text = encodeURIComponent(message || defaultText);
   return `https://wa.me/${phone}?text=${text}`;

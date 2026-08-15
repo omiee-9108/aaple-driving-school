@@ -116,7 +116,7 @@ export const servicesData: ServiceDetail[] = [
     badge: "Fast Track",
     isPopular: true,
     estimatedTime: "7 to 15 Working Days",
-    priceDisplay: "Starts at ₹1,200 + Govt Fees",
+    priceDisplay: "₹1,500 + Govt Fees",
     inclusions: [
       "Verification and digital extraction of old paper/smart card license data",
       "Filing of Form 9 online on Parivahan Sarathi portal",
@@ -178,7 +178,7 @@ export const servicesData: ServiceDetail[] = [
     badge: "Instant 5-Min Service",
     isPopular: true,
     estimatedTime: "5 to 10 Minutes",
-    priceDisplay: "₹50 (2-Wheeler) | ₹125 (4-Wheeler)",
+    priceDisplay: "₹150 (2-Wheeler) | ₹200 (4-Wheeler)",
     inclusions: [
       "High-precision computerized multi-gas emission & smoke density testing",
       "Direct real-time sync with Central Government Parivahan Server",
@@ -232,7 +232,7 @@ export const servicesData: ServiceDetail[] = [
     badge: "Ladies Batch Available",
     isPopular: true,
     estimatedTime: "10 to 15 Days Practical Course",
-    priceDisplay: "Starts at ₹2,500",
+    priceDisplay: "₹3,000",
     inclusions: [
       "Both Non-Geared (Scooty / Activa) and Geared (125cc-150cc bike) training",
       "Dedicated off-road private practice ground for initial balance & braking",
@@ -288,7 +288,7 @@ export const servicesData: ServiceDetail[] = [
     badge: "Flagship Course",
     isPopular: true,
     estimatedTime: "15 to 21 Days (Customizable Batches)",
-    priceDisplay: "Starts at ₹4,500 (Includes Fuel)",
+    priceDisplay: "₹4,000 (Includes Fuel)",
     inclusions: [
       "15 to 21 daily 1-on-1 practical driving sessions (30 to 45 mins/day)",
       "Dual-pedal safety vehicles (Maruti Swift, WagonR, Hyundai i10)",
@@ -336,6 +336,62 @@ export const servicesData: ServiceDetail[] = [
       "Female instructors available for ladies preferring woman-led training",
     ],
     vehicleTypes: ["Maruti Suzuki Swift", "Maruti Suzuki WagonR", "Hyundai Grand i10"],
+  },
+  {
+    id: "2-plus-4-wheeler-combo",
+    slug: "2-plus-4-wheeler-combo",
+    name: "2+4 Wheeler Combo Training (Car + Bike)",
+    marathiName: "२+४ चाकी कम्प्लीट ड्रायव्हिंग पॅकेज (कार + बाईक)",
+    category: "training",
+    categoryLabel: "Driving Training",
+    shortDescription: "Complete dual vehicle training package combining 4-wheeler car and 2-wheeler geared/non-geared training with RTO Miraj test track mastery.",
+    fullDescription: "Get the best value and complete road mastery with our all-in-one 2-Wheeler + 4-Wheeler Combo Driving Course. Designed for beginners who want to master both two-wheelers (Honda Activa / Geared Motorcycle) and four-wheelers (Maruti Swift / WagonR / i10) simultaneously. Includes extensive practice on Miraj RTO 8-track, H-reverse track, hill starts, and city driving.",
+    icon: "Car",
+    badge: "Best Value Combo",
+    isPopular: true,
+    estimatedTime: "21 to 30 Days Practical Course",
+    priceDisplay: "₹4,500 (Complete 2+4 Package)",
+    inclusions: [
+      "Complete 4-wheeler practical driving sessions on dual-pedal cars",
+      "Complete 2-wheeler balance, throttle, and Figure-8 track training",
+      "Simultaneous mock track drills at Miraj RTO ground for both classes",
+      "Combined Parivahan Sarathi LL and DL test slot coordination",
+      "Doorstep pickup available across Miraj city",
+    ],
+    documentsRequired: [
+      "Proof of Age (Aadhaar Card / PAN Card / 10th LC)",
+      "Proof of Address (Aadhaar Card / Electricity Bill)",
+      "4 Recent Passport Size Photographs",
+      "Valid Mobile Number for OTP Verification",
+    ],
+    stepByStepProcess: [
+      {
+        stepNumber: 1,
+        title: "LL Application (MCWG + LMV)",
+        description: "We file the combined Learner License application for both Motorcycle with Gear and Light Motor Vehicle on Sarathi.",
+      },
+      {
+        stepNumber: 2,
+        title: "2-Wheeler Balancing & 8-Track",
+        description: "Master low speed balancing, 8-figure turns, and emergency braking on Activa/geared bike.",
+      },
+      {
+        stepNumber: 3,
+        title: "4-Wheeler Dual-Control Road Sessions",
+        description: "Learn clutch bite-point, gear shifting, hill start, and H-reverse bay on our dual-pedal cars.",
+      },
+      {
+        stepNumber: 4,
+        title: "Miraj RTO Final Test & Smart Card DL",
+        description: "Appear for both practical tests on the official RTO track and receive your combo Smart Card Driving License.",
+      },
+    ],
+    benefits: [
+      "Save up to ₹2,500 compared to enrolling for both courses separately",
+      "Dual license endorsement (MCWG + LMV) in a single RTO visit",
+      "Flexible morning, afternoon, and evening batch slots",
+    ],
+    vehicleTypes: ["Maruti Suzuki Swift / WagonR", "Honda Activa 6G / Hero Splendor"],
   },
   {
     id: "heavy-vehicle-training",
@@ -461,7 +517,7 @@ export const servicesData: ServiceDetail[] = [
     badge: "All-in-One RTO",
     isPopular: true,
     estimatedTime: "7 to 20 Working Days",
-    priceDisplay: "Starts at ₹950 + Govt Fees",
+    priceDisplay: "Starts at ₹1,500 + Govt Fees",
     inclusions: [
       "Vehicle Ownership Transfer (Form 29 & Form 30 preparation & online filing)",
       "Hypothecation Termination (Form 35 + Bank Loan NOC submission)",

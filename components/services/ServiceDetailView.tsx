@@ -309,7 +309,7 @@ export const ServiceDetailView: React.FC<ServiceDetailViewProps> = ({ service })
                 href="/services"
                 className="block text-center text-xs font-bold text-brand-700 hover:text-brand-900 pt-2"
               >
-                View All 10 Services →
+                View All Services & Courses →
               </Link>
             </div>
           </div>

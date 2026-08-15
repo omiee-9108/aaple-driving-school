@@ -15,7 +15,7 @@ export const ServiceHighlights: React.FC<ServiceHighlightsProps> = ({ services }
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
   const categories = [
-    { id: "all", label: "All 10 Services (सर्व सेवा)" },
+    { id: "all", label: "All Services (सर्व सेवा)" },
     { id: "training", label: "🚗 Driving Courses (वाहन प्रशिक्षण)" },
     { id: "license", label: "🪪 License Services (लायसन्स सेवा)" },
     { id: "vehicle_rto", label: "📄 RC & Vehicle Passing (वाहन आरटीओ)" },
@@ -33,7 +33,7 @@ export const ServiceHighlights: React.FC<ServiceHighlightsProps> = ({ services }
         <SectionHeading
           eyebrow="Our Complete Service Offerings"
           title="RTO Approved Driving Courses & Vehicle Services in Miraj"
-          marathiTitle="आपले मोटर ड्रायव्हिंग स्कूलच्या सर्व १० अधिकृत सेवा"
+          marathiTitle="आपले मोटर ड्रायव्हिंग स्कूलच्या सर्व अधिकृत सेवा"
           subtitle="Explore our comprehensive array of driving license assistance, practical courses, instant PUC testing, and vehicle documentation."
         />
 
@@ -69,7 +69,7 @@ export const ServiceHighlights: React.FC<ServiceHighlightsProps> = ({ services }
             href="/services"
             className="border-brand-900 text-brand-900 hover:bg-brand-900 hover:text-white"
           >
-            Explore All 10 Services with Detailed Pricing & Syllabus →
+            Explore All Services & Packages with Detailed Pricing →
           </Button>
         </div>
       </div>

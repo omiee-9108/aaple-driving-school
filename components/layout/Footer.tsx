@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/services" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ChevronRight className="w-3.5 h-3.5 text-brand-500" />
-                  All 10 Services & Courses
+                  All Services & Courses
                 </Link>
               </li>
               <li>
@@ -119,7 +119,7 @@ export const Footer: React.FC = () => {
                   href="/services"
                   className="text-amber-400 hover:text-amber-300 font-semibold inline-block pt-1"
                 >
-                  View All 10 Services →
+                  View All Services & Courses →
                 </Link>
               </li>
             </ul>
@@ -139,16 +139,21 @@ export const Footer: React.FC = () => {
                 </p>
               </div>
 
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                <div>
-                  <a href={`tel:${siteConfig.phoneRaw}`} className="hover:text-white font-bold">
-                    {siteConfig.phone}
-                  </a>
-                  <span className="text-slate-500 mx-1.5">•</span>
-                  <a href={`tel:${siteConfig.altPhoneRaw}`} className="hover:text-white">
-                    {siteConfig.altPhone}
-                  </a>
+              <div className="flex items-start gap-2.5">
+                <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <div>
+                    <span className="text-slate-400 text-[11px] mr-1">Office:</span>
+                    <a href={`tel:${siteConfig.phoneRaw}`} className="hover:text-white font-bold text-slate-100">
+                      {siteConfig.phone}
+                    </a>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-[11px] mr-1">Personal:</span>
+                    <a href={`tel:${siteConfig.altPhoneRaw}`} className="hover:text-white text-slate-200">
+                      {siteConfig.altPhone}
+                    </a>
+                  </div>
                 </div>
               </div>
 

@@ -8,9 +8,9 @@ import { siteConfig } from "@/data/siteConfig";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "All 10 Driving Courses & RTO Services in Miraj",
+  title: "Driving Courses & RTO Services in Miraj | Fees & Packages",
   description:
-    "Explore our complete list of 10 driving courses and RTO services in Miraj: New Driving License, License Renewal, PUC Testing, 2-Wheeler, 4-Wheeler Car Training, Heavy Vehicle, 3-Wheeler Auto, RC Transfer, Number Registration, and VIP Choice Numbers.",
+    "Explore our complete list of driving courses and RTO services in Miraj: 2-Wheeler (₹3,000), 4-Wheeler Car Training (₹4,000), 2+4 Wheeler Combo (₹4,500), Driving License Renewal (₹1,500), PUC Testing (₹150/₹200), RC Transfer, Heavy Vehicle, and VIP Numbers.",
 };
 
 export const revalidate = 60;
@@ -33,7 +33,7 @@ export default async function ServicesPage() {
           </h1>
 
           <p className="text-base sm:text-lg text-brand-200 font-medium">
-            मिरज व सांगली परिसरातील सर्व १० अधिकृत ड्रायव्हिंग कोर्सेस व वाहन सेवा
+            मिरज व सांगली परिसरातील सर्व अधिकृत ड्रायव्हिंग कोर्सेस व वाहन सेवा
           </p>
 
           <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">

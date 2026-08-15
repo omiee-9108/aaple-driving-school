@@ -52,16 +52,16 @@ const BATCH_TIMINGS = [
 
 const DEFAULT_COURSE_FEES: Record<string, number> = {
   "3-Wheeler / Auto Rickshaw Training (AR.TR)": 4500,
-  "4-Wheeler Car Training (LMV)": 5500,
-  "4-Wheeler Car + 2-Wheeler Combo": 7500,
+  "4-Wheeler Car Training (LMV)": 4000,
+  "4-Wheeler Car + 2-Wheeler Combo": 4500,
   "2-Wheeler + 3-Wheeler Combo (MCB. AR.TR)": 6000,
-  "2-Wheeler Training (Activa / Bike)": 2500,
+  "2-Wheeler Training (Activa / Bike)": 3000,
   "Heavy / Commercial Vehicle (LMV TR)": 6500,
   "Heavy Vehicle Training (HMV / Transport)": 9000,
   "Old DL Renewal & Medical Form 1A": 1500,
   "New Driving License Assistance (LL & DL)": 3000,
-  "Instant PUC Certificate (Annual)": 300,
-  "RC Ownership Transfer & Passing": 2500,
+  "Instant PUC Certificate (Annual)": 200,
+  "RC Ownership Transfer & Passing": 1500,
 };
 
 export function StudentModal({

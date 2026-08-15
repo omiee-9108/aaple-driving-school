@@ -290,7 +290,7 @@ export const Header: React.FC = () => {
                 pathname === "/services" ? "bg-brand-50 text-brand-900" : "text-slate-800"
               }`}
             >
-              All 10 Services
+              All Services & Courses
             </Link>
             <div className="pl-4 space-y-1 border-l-2 border-brand-100 my-2">
               {servicesData.map((s) => (

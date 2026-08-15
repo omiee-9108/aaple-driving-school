@@ -17,7 +17,7 @@ import { LeadForm } from "@/components/forms/LeadForm";
 export const metadata: Metadata = {
   title: "Contact Us & Admission Enquiry | Aaple Motor Driving School Miraj",
   description:
-    "Get in touch with Aaple Motor Driving School in Miraj, Maharashtra. Enroll for driving classes, book RTO test slots, or request fee details. Phone: +91 70831 27002.",
+    "Get in touch with Aaple Motor Driving School in Miraj, Maharashtra. Enroll for driving classes, book RTO test slots, or request fee details. Office: +91 88883 34136, Personal: +91 70288 37002.",
 };
 
 export default function ContactPage() {
@@ -73,16 +73,21 @@ export default function ContactPage() {
               <div className="space-y-4 text-xs sm:text-sm">
                 <div className="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-100">
                   <Phone className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-bold text-slate-900">Primary Phone Numbers</div>
-                    <div className="mt-1 space-x-2">
-                      <a href={`tel:${siteConfig.phoneRaw}`} className="text-brand-700 font-bold hover:underline">
-                        {siteConfig.phone}
-                      </a>
-                      <span>•</span>
-                      <a href={`tel:${siteConfig.altPhoneRaw}`} className="text-brand-700 font-semibold hover:underline">
-                        {siteConfig.altPhone}
-                      </a>
+                  <div className="space-y-1">
+                    <div className="font-bold text-slate-900">Official Contact Numbers</div>
+                    <div className="flex flex-col gap-1 mt-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-semibold text-slate-500 bg-slate-200/80 px-1.5 py-0.5 rounded">Office:</span>
+                        <a href={`tel:${siteConfig.phoneRaw}`} className="text-brand-800 font-bold hover:underline">
+                          {siteConfig.phone}
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-semibold text-slate-500 bg-slate-200/80 px-1.5 py-0.5 rounded">Personal:</span>
+                        <a href={`tel:${siteConfig.altPhoneRaw}`} className="text-brand-800 font-semibold hover:underline">
+                          {siteConfig.altPhone}
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
